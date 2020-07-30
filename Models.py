@@ -25,10 +25,13 @@ BLANCO = color(255,255,255)
 
 class Render(object):
 
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.curr_color = BLANCO
+    def __init__(self):
+        self.framebuffer = []
+        self.color = BLANCO
+        self.bg_color = NEGRO
+        self.xPort = 0
+        self.yPort = 0
+        self.glCreateWindow(1,1)
 
     # función glInit() 
     def glInit(self):
@@ -273,3 +276,9 @@ class Render(object):
                 y2 = round((v2[1] + translate[1]) * scale[1])
 
                 self.line((x1, y1), (x2, y2))
+
+r = Render()
+r.glCreateWindow(500,1000)
+print(r.glInit())
+r.load('./Models/face.obj', (10,10),(10,10))
+r.glFinish('output.bmp')

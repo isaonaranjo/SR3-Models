@@ -4,7 +4,7 @@
 # ===============================================================
 
 class Obj(object):
-    def __init__(self, filename):
+    def __init__(self,filename):
         with open(filename) as f:
             self.lines = f.read().splitlines()
 
@@ -14,10 +14,10 @@ class Obj(object):
 
     def read(self):
         for line in self.lines:
-            if line:
-                prefix, value = line.split(' ', 1)
+                if line:
+                    prefix, value = line.split(' ', 1)
+                    if prefix == 'v': # vertices
+                        self.vertices.append(list(map(float,value.split(' '))))
+                    elif prefix == 'f': # Faces
+                        self.faces.append([list(map(int,vert.split('/'))) for vert in value.split(' ')])
 
-                if prefix == 'v':
-                    self.vertices.append(list(map(float, value.split(' '))))
-                elif prefix == 'f':
-                    self.faces.append([list(map(int , face.split('/'))) for face in value.split(' ')])
